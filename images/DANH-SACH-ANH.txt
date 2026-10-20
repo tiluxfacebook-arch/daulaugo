@@ -1,0 +1,24 @@
+THƯ MỤC ẢNH CHO LANDING TILUX TẾT 2027
+Đặt ảnh vào thư mục này (cùng cấp với index.html), đặt ĐÚNG tên file bên dưới.
+Định dạng: .webp (ưu tiên, nhẹ hơn) hoặc .png nền trong suốt. Có ảnh -> trang tự hiện ảnh; chưa có -> dùng hình vẽ SVG tạm.
+
+CHÚ DÊ (cùng 1 nhân vật, nền trong suốt, khoảng 600x750px):
+  de-chao        - cúi chào / giơ bảng (hero)
+  de-vay-tay     - vẫy tay chào
+  de-kinh-lup    - cầm kính lúp (phần giới thiệu)
+  de-chi-tay     - chỉ tay sang PHẢI (lợi ích, ưu đãi, so sánh)
+  de-vo-tay      - vỗ tay (hái lộc)
+  de-phao        - nhảy múa với dây pháo (form, ăn mừng)
+
+KHÁC:
+  canh-mai       - cành mai, nền trong suốt, cành vươn từ GÓC TRÁI TRÊN (khoảng 900x470px)
+  canh-dao       - cành đào, nền trong suốt, cành vươn từ GÓC PHẢI TRÊN (khoảng 900x470px)
+  cay-hai-loc    - cây hái lộc, nền trong suốt (khoảng 1000x840px, tỉ lệ 5:4.2)
+  than-tai       - Ông Thần Tài, nền trong suốt (khoảng 500x600px)
+  banh-chung     - icon bánh chưng, nền trong suốt (khoảng 128x128px)
+  mam-ngu-qua    - mâm ngũ quả, nền trong suốt (khoảng 600x400px)
+  cay-neu        - cây nêu dựng đứng, nền trong suốt, ảnh dọc (khoảng 160x1000px)
+  nen-hero       - ảnh nền chợ hoa đêm (1920x1080px, KHÔNG cần nền trong suốt)
+
+Ví dụ: images/de-chao.webp, images/nen-hero.webp
+Nén ảnh: squoosh.app hoặc tinypng.com (mỗi ảnh nên dưới 200KB, ảnh nền dưới 350KB).
