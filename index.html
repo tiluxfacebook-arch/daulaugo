@@ -2063,11 +2063,12 @@ if ('IntersectionObserver' in window) {
       cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + 'px'; cv.style.height = H + 'px'; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
     function burst(x, y, big){
-      var n = Math.round((big ? 72 : 46) * (mob ? .5 : 1)), c1 = COLORS[Math.random() * COLORS.length | 0], c2 = COLORS[Math.random() * COLORS.length | 0];
+      var n = Math.round((big ? 72 : 60) * (mob ? .55 : 1)), PAL = fixed ? ['#D62839', '#E0567F', '#C99A1E', '#F28C28', '#B3202F'] : COLORS, c1 = PAL[Math.random() * PAL.length | 0], c2 = PAL[Math.random() * PAL.length | 0];
       for (var i = 0; i < n; i++) {
-        var a = Math.PI * 2 * i / n + Math.random() * .2, sp = (big ? 1.6 : 1.1) + Math.random() * (big ? 3 : 2.2);
-        P.push({x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, d: .011 + Math.random() * .01, r: 1.3 + Math.random() * 1.6, c: i % 3 ? c1 : c2});
+        var a = Math.PI * 2 * i / n + Math.random() * .2, sp = (big ? 1.6 : 1.4) + Math.random() * (big ? 3 : 2.8);
+        P.push({x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, d: .011 + Math.random() * .01, r: (fixed ? 2.4 : 1.3) + Math.random() * (fixed ? 2.6 : 1.6), c: i % 3 ? c1 : c2});
       }
+      if (fixed) { P.push({ring: true, x: x, y: y, R: 6, life: 1, d: .03, c: '#C99A1E'}); P.push({ring: true, x: x, y: y, R: 2, life: 1, d: .045, c: '#D62839'}); }
       var MAX = mob ? 180 : 420; if (P.length > MAX) P.splice(0, P.length - MAX);
       loop();
     }
@@ -2076,7 +2077,10 @@ if ('IntersectionObserver' in window) {
       if (auto && t > next) { burst(W * (mob ? .15 + Math.random() * .7 : .06 + Math.random() * .46), H * (mob ? .06 + Math.random() * .2 : .1 + Math.random() * .32)); next = t + (mob ? 1500 : 950) + Math.random() * 700; }
       ctx.clearRect(0, 0, W, H);
       for (var i = P.length - 1; i >= 0; i--) {
-        var p = P[i]; p.vx *= .986; p.vy = p.vy * .986 + .03 * k; p.x += p.vx * k; p.y += p.vy * k; p.life -= p.d * k;
+        var p = P[i];
+        if (p.ring) { p.R += 3.2 * k; p.life -= p.d * k; if (p.life <= 0) { P.splice(i, 1); continue; }
+          ctx.globalAlpha = p.life; ctx.strokeStyle = p.c; ctx.lineWidth = 3 * p.life + .5; ctx.beginPath(); ctx.arc(p.x, p.y, p.R, 0, 6.2832); ctx.stroke(); continue; }
+        p.vx *= .986; p.vy = p.vy * .986 + .03 * k; p.x += p.vx * k; p.y += p.vy * k; p.life -= p.d * k;
         if (p.life <= 0) { P.splice(i, 1); continue; }
         ctx.globalAlpha = p.life * .85; ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
       }
