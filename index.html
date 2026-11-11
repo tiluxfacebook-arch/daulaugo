@@ -397,6 +397,48 @@ h3{font-size:clamp(18px,2.2vw,22px);font-weight:700}
   .hero-sticker{width:80px;height:80px;font-size:11px}
   .hero-sticker b{font-size:18px}
 }
+
+/* ===== Tối ưu điện thoại: nút gọn, không chật màn hình ===== */
+@media(max-width:480px){
+  .section{padding:46px 0}
+  .section-head{margin-bottom:26px}
+  .section-head p{font-size:15.5px}
+  h2{font-size:24px}
+  .btn{font-size:15px}
+  .btn-lg{padding:13px 14px;font-size:15px}
+  .btn svg{width:18px;height:18px}
+  .hero-cta{gap:10px;flex-wrap:nowrap}
+  .hero-cta .btn{flex:1 1 0;white-space:nowrap;min-width:0}
+  .hero-sub{font-size:15.5px;margin:12px 0 16px}
+  .hero-points{gap:8px;margin-bottom:18px}
+  .hero-points li{font-size:15px}
+  .hero-price{gap:4px 10px;margin-bottom:16px}
+  .hero-price .now{font-size:28px}
+  .hero-price .from{font-size:13px}
+  .hero-price .ship{font-size:12px;padding:4px 10px}
+  .trust-row{gap:8px 16px;font-size:13.5px;margin-top:16px}
+  .trust-row svg{width:17px;height:17px}
+  .countdown{padding:12px 14px}
+  .cd-time b{font-size:19px}
+  .order-total{flex-direction:column;align-items:flex-start;gap:2px}
+  .order-total small{text-align:left}
+  .order-total b{font-size:24px}
+  .form-submit{font-size:15.5px;padding:15px 14px;gap:8px}
+  .form-submit .btn-text{white-space:nowrap}
+  .form-group > label{font-size:14.5px;margin-bottom:6px}
+  .form-group input,.form-group select,.form-group textarea{padding:12px 13px}
+  .combo-name b{font-size:15px}
+  .combo-name small{font-size:12px}
+  .form-title h3{font-size:23px}
+  .form-safe{font-size:12.5px;gap:4px 12px}
+  .faq-q{font-size:15.5px;padding:15px 16px}
+  .faq-a p{padding:0 16px 15px;font-size:15px}
+  .sticky-bar{padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:8px}
+  .sticky-bar .btn{padding:12px 10px;font-size:15px}
+  .sticky-bar .call{padding:12px 14px}
+  .step{padding:30px 18px 20px}
+  .spec-row{font-size:14px}
+}
 </style>
 
 <!-- TET 2027 -->
@@ -628,8 +670,11 @@ main{position:relative;z-index:1}
   .tet-lixi{width:34px;height:66px;margin-left:-17px}
   .tet-lixi svg{width:30px;height:42px;top:20px}
   .tet-lixi::before{height:22px}
-  .tet-goat-fly{bottom:84px;width:64px}
+  .tet-goat-fly{bottom:72px;width:50px;left:6px}
+  .tet-goat-fly .tet-bubble{font-size:11.5px;padding:6px 10px}
   .tet-sound{bottom:86px;width:40px;height:40px;right:10px}
+  .tet-sound.in-header{position:static;width:40px;height:40px;box-shadow:none;flex:0 0 40px}
+  .tet-sound.in-header svg{width:20px;height:20px}
   .footer > .container{padding-left:16px;padding-right:16px}
   .footer{padding-top:56px}
 }
@@ -752,7 +797,7 @@ h1 .hl,.section-head h2 .hl,.tet-shine{background:linear-gradient(100deg,#8B1E1E
 .tet-modal-wish{font-size:34px}
 
 @media(max-width:1024px){ .tet-branch3{width:220px;height:116px} }
-.tet-goat-fly.tet-in .tet-bubble{animation:tet-pop-l .45s cubic-bezier(.5,1.6,.4,1) both,tet-hide-b .4s ease 3.6s forwards}
+.tet-goat-fly.tet-in .tet-bubble{animation:tet-pop-l .45s cubic-bezier(.5,1.6,.4,1) both,tet-hide-b .4s ease 2.8s forwards}
 @keyframes tet-hide-b{to{opacity:0;transform:scale(.6)}}
 @media(max-width:768px){
   .tet-branch3{width:150px;height:78px;top:-2px}
@@ -2043,6 +2088,8 @@ if ('IntersectionObserver' in window) {
     };
   })();
   var sBtn = $('tetSound');
+  // Điện thoại: đưa nút loa lên thanh menu để không che nội dung
+  if (window.innerWidth <= 768) { var ha = document.querySelector('.header-actions'), mt = document.getElementById('menuToggle'); if (ha && mt) { ha.insertBefore(sBtn, mt); sBtn.classList.add('in-header'); } }
   function syncSoundBtn(){ sBtn.setAttribute('aria-pressed', Snd.on ? 'true' : 'false'); }
   syncSoundBtn();
   sBtn.addEventListener('click', function(){ Snd.unlock(); Snd.set(!Snd.on); syncSoundBtn(); });
@@ -2160,7 +2207,7 @@ if ('IntersectionObserver' in window) {
   }
   var flyMap = [
     ['hero', '.hero'], ['intro', '.pain-grid'], ['intro', '#co-che'], ['benefit', '#loi-ich'], ['hailoc', '#hai-loc'], ['steps', '#cach-dung'],
-    ['compare', '#so-sanh'], ['cho', '#cho-tet'], ['offer', '#dat-hang'], ['faq', '#faq']
+    ['compare', '#so-sanh'], ['cho', '#cho-tet'], ['offer', '#dat-hang'], ['faq', '#faq'], ['foot', '.footer'], ['foot', '.final-cta']
   ];
   if (fly && 'IntersectionObserver' in window) {
     var visible = {};
@@ -2168,7 +2215,7 @@ if ('IntersectionObserver' in window) {
       es.forEach(function(en){ visible[en.target.__tetKey + '|' + en.target.__tetIdx] = en.isIntersecting ? en.intersectionRatio : 0; });
       var best = '', bestR = 0;
       Object.keys(visible).forEach(function(k){ if (visible[k] > bestR) { bestR = visible[k]; best = k.split('|')[0]; } });
-      flyShow(best === 'hero' ? '' : best);
+      flyShow(best === 'hero' || best === 'foot' || (best === 'offer' && window.innerWidth < 769) ? '' : best);
     }, {threshold: [0, .15, .3, .5]});
     flyMap.forEach(function(m, i){
       var el = document.querySelector(m[1]); if (!el) return;
